@@ -70,6 +70,11 @@ public:
       }
    }
 
+   void SetPX(int spx, int spy)
+   {
+            Bitmap.SetPixel(spx, spy);
+   }
+
    void DrawHLine(int sy, int ey, int nx, bool bCropped = false)
    {
       for (int i = sy; i <= ey; i++)
