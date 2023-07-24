@@ -2,6 +2,7 @@
 #include "radio.hpp"
 #include "system.hpp"
 #include "uv_k5_display.hpp"
+#include <math.h>
 
 typedef unsigned char u8;
 typedef signed short i16;
@@ -91,27 +92,6 @@ public:
   inline void DrawNums() {
     Display.SetCoursorXY(0, 0);
     Display.PrintFixedDigitsNumber2(scanDelay, 0);
-
-    Display.SetCoursorXY(51, 0);
-    Display.PrintFixedDigitsNumber2(scanStep << (7 - sampleZoom));
-
-    Display.SetCoursorXY(58, 8);
-    Display.PrintFixedDigitsNumber2(scanStep);
-
-    Display.SetCoursorXY(107, 8);
-    Display.PrintFixedDigitsNumber2(highestPeakRssi, 0);
-
-    Display.SetCoursorXY(86, 0);
-    Display.PrintFixedDigitsNumber2(highestPeakF);
-
-    Display.SetCoursorXY(44, 48);
-    Display.PrintFixedDigitsNumber2(currentFreq);
-
-    Display.SetCoursorXY(100, 48);
-    Display.PrintFixedDigitsNumber2(frequencyChangeStep);
-
-    Display.SetCoursorXY(0, 8);
-    Display.PrintFixedDigitsNumber2(rssiTriggerLevel, 0);
   }
 
   inline void DrawRssiTriggerLevel() {
@@ -219,29 +199,19 @@ public:
   }
 
   void UpdateScanDelay(i32 diff) {
-    scanDelay = clamp(scanDelay + diff, 800, 3200);
-    OnUserInput();
+
   }
 
   void UpdateSampleZoom(i32 diff) {
-    sampleZoom = clamp(sampleZoom - diff, 0, 5);
-    measurementsCount = 1 << (7 - sampleZoom);
-    OnUserInput();
+
   }
 
   void UpdateCurrentFreq(i64 diff) {
-    currentFreq = clamp(currentFreq + diff, 18_MHz, 1300_MHz);
-    OnUserInput();
+
   }
 
   void UpdateScanStep(i32 diff) {
-    if (diff > 0 && scanStep < 25_KHz) {
-      scanStep <<= 1;
-    }
-    if (diff < 0 && scanStep > 6250_Hz) {
-      scanStep >>= 1;
-    }
-    OnUserInput();
+
   }
 
   void UpdateFreqChangeStep(i64 diff) {
