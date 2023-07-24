@@ -3,7 +3,6 @@
 #include "system.hpp"
 #include "uv_k5_display.hpp"
 #include <math.h>
-#include <stdlib.h>
 
 typedef unsigned char u8;
 typedef signed short i16;
@@ -27,7 +26,7 @@ public:
   u8 highestPeakX = 0;
   u8 highestPeakT = 0;
   u8 highestPeakRssi = 0;
-  u32 highestPeakF = 0;
+
   u32 FStart;
 
   CSpectrum()
@@ -62,11 +61,35 @@ public:
   inline void DrawSpectrum() {
     for (u8 x = 0; x < 128; ++x) {
               for (u8 y = 0; y < 56; ++y) {
-      Display.SetPX(x, y+8);
+      Display.SetPX(x, y);
     }
     }
 ///////////// MANDEL >>>
+            u8 max=100;
+            u8 height=56;
+            u8 width=128;
 
+       u8 c_re;
+        u8 c_im;
+        u8 x,y;
+        u8 iteration;
+            u8 x_new;
+
+   for (u8 row = 0; row < height; row++) {
+    for (u8 col = 0; col < width; col++) {
+        c_re = (col - width/2.0)*4.0/width;
+        c_im = (row - height/2.0)*4.0/width;
+        x = 0, y = 0;
+        iteration = 0;
+        while (x*x+y*y <= 4 && iteration < max) {
+            x_new = x*x - y*y + c_re;
+            y = 2*x*y + c_im;
+            x = x_new;
+            iteration++;
+        }
+        if (iteration >= max) { Display.SetPX(col, row); }
+    }
+}
 
 //// < MANDEL
             
@@ -192,7 +215,7 @@ inline void DrawNums() {
     highestPeakT = 0;
     highestPeakRssi = 0;
     highestPeakX = 64;
-    highestPeakF = currentFreq;
+
 
     Fw.DelayUs(90000);
   }
@@ -242,9 +265,9 @@ private:
   }
 
   u8 GetRssi(u32 f) {
-    RadioDriver.SetFrequency(f);
-    Fw.DelayUs(scanDelay);
-    return Fw.BK4819Read(0x67);
+    //RadioDriver.SetFrequency(f);
+    //Fw.DelayUs(scanDelay);
+    //return Fw.BK4819Read(0x67);
   }
 
   inline bool IsFlashLightOn() { return GPIOC->DATA & GPIO_PIN_3; }
@@ -254,7 +277,7 @@ private:
   }
 
   inline u8 Rssi2Y(u8 rssi) {
-    return clamp(DrawingEndY - (rssi - rssiMin), 1, DrawingEndY);
+    //return clamp(DrawingEndY - (rssi - rssiMin), 1, DrawingEndY);
   }
 
   inline i32 clamp(i32 v, i32 min, i32 max) {
