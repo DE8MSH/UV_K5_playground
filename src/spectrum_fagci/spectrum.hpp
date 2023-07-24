@@ -38,50 +38,13 @@ public:
   };
 
   inline bool ListenPeak() {
-    if (highestPeakRssi < rssiTriggerLevel) {
-      return false;
-    }
 
-    // measure peak for this moment
-    highestPeakRssi = GetRssi(highestPeakF); // also sets freq for us
-    rssiHistory[highestPeakX >> sampleZoom] = highestPeakRssi;
-
-    if (highestPeakRssi >= rssiTriggerLevel) {
-      RadioDriver.ToggleAFDAC(true);
-      Listen(1000000);
-      return true;
-    }
-
-    return false;
+            
   }
 
   inline void Scan() {
-    u8 rssi = 0, rssiMax = 0;
-    u8 iPeak = 0;
-    u32 fPeak = currentFreq, fMeasure = FStart;
 
-    rssiMin = 255;
-    RadioDriver.ToggleAFDAC(false);
-
-    for (u8 i = 0; i < measurementsCount; ++i, fMeasure += scanStep) {
-      rssi = rssiHistory[i] = GetRssi(fMeasure);
-      if (rssi < rssiMin) {
-        rssiMin = rssi;
-      }
-      if (rssi > rssiMax) {
-        rssiMax = rssi;
-        fPeak = fMeasure;
-        iPeak = i;
-      }
-    }
-
-    ++highestPeakT;
-    if (rssiMax > highestPeakRssi || highestPeakT >= (8 << sampleZoom)) {
-      highestPeakT = 0;
-      highestPeakRssi = rssiMax;
-      highestPeakX = iPeak << sampleZoom;
-      highestPeakF = fPeak;
-    }
+            
   }
 
   inline void DrawSpectrum() {
