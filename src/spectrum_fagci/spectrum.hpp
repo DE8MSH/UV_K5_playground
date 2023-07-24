@@ -41,7 +41,7 @@ public:
     }
 
     // measure peak for this moment
-    highestPeakRssi = GetRssi(highestPeakF); // also sets freq for us
+    highestPeakRssi = 1; // also sets freq for us
     rssiHistory[highestPeakX >> sampleZoom] = highestPeakRssi;
 
     if (highestPeakRssi >= rssiTriggerLevel) {
