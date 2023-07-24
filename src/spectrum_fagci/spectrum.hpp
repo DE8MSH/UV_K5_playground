@@ -100,7 +100,7 @@ public:
                               i16 R=X*X;
                               i16 Q=Y*Y;
                               if (R+Q>4 || N>=L) {
-                                        if (N>=10) {
+                                        if (N<10) {
                                                   Display.SetPX(I, J+8);
                                         }
                               }
