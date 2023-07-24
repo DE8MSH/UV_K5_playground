@@ -91,7 +91,7 @@ public:
     }
             
 ///////////// MANDEL >>>
-            u8 max=100
+            u8 max=100;
             u8 height=56;
             u8 width=128;
    for (u8 row = 0; row < height; row++) {
