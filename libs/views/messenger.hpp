@@ -61,7 +61,7 @@ public:
       ClearDrawingsIfNeeded();
       PrintTxData();
       PrintRxData();
-      Display.DrawRectangle(0, (8 * 4) - 6, 127, 24 + 6, false);
+      //Display.DrawRectangle(0, (8 * 4) - 6, 127, 24 + 6, false);
 
       if (u8RxDoneLabelCnt < 100)
       {
