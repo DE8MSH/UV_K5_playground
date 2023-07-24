@@ -91,37 +91,27 @@ public:
     }
             
 ///////////// MANDEL >>>
-          i16 L=100;
-
-                              i16 U;
-                              i16 V;
-                              i16 X;        
-                              i16 Y;
-                              i16 N;
-                              i16 R;
-                              i16 Q;
-            for (u8 I = 0; I < 128; ++I) {
-                    for (u8 J = 0; J < 56; ++J) {
-                              U=I/64-1.5;
-                              V=J/28-1;
-                              X=U;        
-                              Y=V;
-                              N=0;
-                              R=X*X;
-                              Q=Y*Y;
-                              if (R+Q>4 || N>=L) {
-                                        if (N>=10) {
-                                                  Display.SetPX(I, J+8);
-                                        }
-                              }
-                              else {
-                                        Y=2*X*Y+V;
-                                        X=R-Q+U;
-                                        N=N+1;
-                              }
-                    }          
-          }
-            
+            u8 max=100
+            u8 height=56;
+            u8 width=128;
+   for (u8 row = 0; row < height; row++) {
+    for (u8 col = 0; col < width; col++) {
+        i16 c_re = (col - width/2.0)*4.0/width;
+        i16 c_im = (row - height/2.0)*4.0/width;
+        i16 x = 0, y = 0;
+        u8 iteration = 0;
+        while (x*x+y*y <= 4 && iteration < max) {
+            i16 x_new = x*x - y*y + c_re;
+            y = 2*x*y + c_im;
+            x = x_new;
+            iteration++;
+        }
+        if (iteration < max) { 
+        } 
+        else { Display.SetPX(col, row);
+             }
+    }
+}
 
 //// < MANDEL
             
