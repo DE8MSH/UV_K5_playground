@@ -123,23 +123,11 @@ inline void DrawNums() {
   }
 
   inline void DrawRssiTriggerLevel() {
- //   Display.DrawLine(0, 127, Rssi2Y(rssiTriggerLevel));
+
   }
 
   inline void DrawTicks() {
-    u32 f = modulo(FStart, 1_MHz);
-    u32 step = scanStep >> sampleZoom;
-    for (u8 i = 0; i < 128; ++i, f += step) {
-      u8 barValue = 0b00001000;
-      modulo(f, 100_KHz) < step && (barValue |= 0b00010000);
-      modulo(f, 500_KHz) < step && (barValue |= 0b00100000);
-      modulo(f, 1_MHz) < step && (barValue |= 0b11000000);
 
-      *(FwData.pDisplayBuffer + BarPos + i) |= barValue;
-    }
-
-    // center
-    *(FwData.pDisplayBuffer + BarPos + 64) |= 0b10101010;
   }
 
   inline void DrawArrow(u8 x) {
