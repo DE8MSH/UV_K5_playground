@@ -3,7 +3,7 @@
 #include "system.hpp"
 #include "uv_k5_display.hpp"
 #include <math.h>
-///#include <stdlib.h>
+/////////#include <stdlib.h>
 
 typedef unsigned char u8;
 typedef signed short i16;
@@ -21,7 +21,7 @@ public:
   static constexpr auto DrawingEndY = 42;
   static constexpr auto BarPos = 5 * 128;
 
-
+  u8 rssiHistory[128] = {};
   u8 measurementsCount = 32;
   u8 rssiMin = 255;
   u8 highestPeakX = 0;
@@ -38,19 +38,58 @@ public:
   };
 
   inline bool ListenPeak() {
+    if (highestPeakRssi < rssiTriggerLevel) {
+      return false;
+    }
 
-            
+    // measure peak for this moment
+    highestPeakRssi = GetRssi(highestPeakF); // also sets freq for us
+    rssiHistory[highestPeakX >> sampleZoom] = highestPeakRssi;
+
+    if (highestPeakRssi >= rssiTriggerLevel) {
+      RadioDriver.ToggleAFDAC(true);
+      Listen(1000000);
+      return true;
+    }
+
+    return false;
   }
 
   inline void Scan() {
+    u8 rssi = 0, rssiMax = 0;
+    u8 iPeak = 0;
+    u32 fPeak = currentFreq, fMeasure = FStart;
 
-            
+    rssiMin = 255;
+    RadioDriver.ToggleAFDAC(false);
+
+    for (u8 i = 0; i < measurementsCount; ++i, fMeasure += scanStep) {
+      rssi = rssiHistory[i] = GetRssi(fMeasure);
+      if (rssi < rssiMin) {
+        rssiMin = rssi;
+      }
+      if (rssi > rssiMax) {
+        rssiMax = rssi;
+        fPeak = fMeasure;
+        iPeak = i;
+      }
+    }
+
+    ++highestPeakT;
+    if (rssiMax > highestPeakRssi || highestPeakT >= (8 << sampleZoom)) {
+      highestPeakT = 0;
+      highestPeakRssi = rssiMax;
+      highestPeakX = iPeak << sampleZoom;
+      highestPeakF = fPeak;
+    }
   }
 
+
   inline void DrawSpectrum() {
-//    for (u8 x = 0; x < 128; ++x) {
-//      Display.SetPX(x, 40);
-//    }
+    for (u8 x = 0; x < 128; ++x) {
+      Display.SetPX(x, 40);
+    }
+            
 ///////////// MANDEL >>>
           i16 L=100;
 
@@ -76,9 +115,9 @@ public:
                                         }
                               }
                               else {
-                              Y=2*X*Y+V;
-                              X=R-Q+U;
-                              N=N+1;
+                                        Y=2*X*Y+V;
+                                        X=R-Q+U;
+                                        N=N+1;
                               }
                     }          
           }
@@ -88,7 +127,7 @@ public:
             
   }
 
-  inline void DrawNums() {
+inline void DrawNums() {
     //Display.SetCoursorXY(0, 0);
     //Display.PrintFixedDigitsNumber2(scanDelay, 0);
   }
