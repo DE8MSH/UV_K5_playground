@@ -89,17 +89,17 @@ public:
 //      Display.SetPX(x, 40);
 //    }
 ///////////// MANDEL >>>
-          u8 L=100;
+          i16 L=100;
           for (u8 I = 0; I < 128; ++I) {
                     for (u8 J = 0; J < 56; ++J) {
-                              u8 U=I/64-1.5;
-                              u8 V=J/28-1;
-                              u8 X=U;        
-                              u8 Y=V;
-                              u8 N=0;
-                              u8 R=X*X;
-                              u8 Q=Y*Y;
-                              if ((R+Q>4) OR (N>=L) {
+                              i16 U=I/64-1.5;
+                              i16 V=J/28-1;
+                              i16 X=U;        
+                              i16 Y=V;
+                              i16 N=0;
+                              i16 R=X*X;
+                              i16 Q=Y*Y;
+                              if (R+Q>4 || N>=L) {
                                         Display.SetPX(x, y+8);
                               }
                               Y=2*X*Y+V;
