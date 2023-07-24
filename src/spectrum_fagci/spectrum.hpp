@@ -100,7 +100,7 @@ public:
                               i16 R=X*X;
                               i16 Q=Y*Y;
                               if (R+Q>4 || N>=L) {
-                                        Display.SetPX(x, y+8);
+                                        Display.SetPX(I, J+8);
                               }
                               Y=2*X*Y+V;
                               X=R-Q+U;
