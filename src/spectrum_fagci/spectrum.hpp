@@ -3,7 +3,7 @@
 #include "system.hpp"
 #include "uv_k5_display.hpp"
 #include <math.h>
-#include <stdlib.h>
+///#include <stdlib.h>
 
 typedef unsigned char u8;
 typedef signed short i16;
@@ -108,7 +108,7 @@ public:
                               R=X*X;
                               Q=Y*Y;
                               if (R+Q>4 || N>=L) {
-                                        if (N=>10) {
+                                        if (N>=10) {
                                                   Display.SetPX(I, J+8);
                                         }
                               }
