@@ -227,7 +227,7 @@ public:
       {
          unsigned char u8BlockHeight = i + 1 > BlockSizeY ? BlockSizeY : i + 1;
          unsigned char u8X = i * (BlockSizeX + BlockSpace) + ChartStartX;
-         Display.DrawRectangle(u8X, 24 + BlockSizeY - u8BlockHeight, BlockSizeX,
+         //Display.DrawRectangle(u8X, 24 + BlockSizeY - u8BlockHeight, BlockSizeX,
                                u8BlockHeight, i < LinearBlocksCnt);
       }
    }
