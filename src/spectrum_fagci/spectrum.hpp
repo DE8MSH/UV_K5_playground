@@ -60,38 +60,13 @@ public:
 
 
   inline void DrawSpectrum() {
-   // for (u8 x = 0; x < 128; ++x) {
-   //   Display.SetPX(x, 40);
-   // }
-            
-///////////// MANDEL >>>
-            u8 max=100;
-            u8 height=56;
-            u8 width=128;
-
-       u8 c_re;
-        u8 c_im;
-        u8 x,y;
-        u8 iteration;
-
-   for (u8 row = 0; row < height; row++) {
-    for (u8 col = 0; col < width; col++) {
-        c_re = (col - width/2.0)*4.0/width;
-        c_im = (row - height/2.0)*4.0/width;
-        x = 0, y = 0;
-        iteration = 0;
-        while (x*x+y*y <= 4 && iteration < max) {
-            i16 x_new = x*x - y*y + c_re;
-            y = 2*x*y + c_im;
-            x = x_new;
-            iteration++;
-        }
-        if (iteration < max) { 
-        } 
-        else { Display.SetPX(col, row);
-             }
+    for (u8 x = 0; x < 128; ++x) {
+              for (u8 y = 0; x < 56; ++<) {
+      Display.SetPX(x, y+8);
     }
-}
+    }
+///////////// MANDEL >>>
+
 
 //// < MANDEL
             
