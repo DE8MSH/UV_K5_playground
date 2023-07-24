@@ -3,6 +3,7 @@
 #include "system.hpp"
 #include "uv_k5_display.hpp"
 #include <math.h>
+#include <stdlib.h>
 
 typedef unsigned char u8;
 typedef signed short i16;
@@ -85,7 +86,7 @@ public:
 
   inline void DrawSpectrum() {
     for (u8 x = 0; x < 128; ++x) {
-      Display.SetPX(40, x);
+      Display.SetPX(x, 40);
     }
   }
 
