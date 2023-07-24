@@ -2,8 +2,8 @@
 #include "radio.hpp"
 #include "system.hpp"
 #include "uv_k5_display.hpp"
-//#include <math.h>
-/////////#include <stdlib.h>
+#include <math.h>
+#include <stdlib.h>
 
 typedef unsigned char u8;
 typedef signed short i16;
@@ -69,9 +69,9 @@ public:
             u8 height=56;
             u8 width=128;
 
-       i16 c_re;
-        i16 c_im;
-        i16 x,y;
+       u8 c_re;
+        u8 c_im;
+        u8 x,y;
         u8 iteration;
 
    for (u8 row = 0; row < height; row++) {
