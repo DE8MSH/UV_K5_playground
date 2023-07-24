@@ -170,11 +170,11 @@ public:
 
   void Render() {
     DisplayBuff.ClearAll();
-    DrawTicks();
-    DrawArrow(highestPeakX);
+//    DrawTicks();
+ //   DrawArrow(highestPeakX);
     DrawSpectrum();
-    DrawRssiTriggerLevel();
-    DrawNums();
+//    DrawRssiTriggerLevel();
+//    DrawNums();
     Fw.FlushFramebufferToScreen();
   }
 
