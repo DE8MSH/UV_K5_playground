@@ -89,11 +89,11 @@ public:
       Display.SetPX(x, 40);
     }
 ///////////// MANDEL >>>
-          int L=100
-          for (u8 I = 0; I < 128; ++I) {
-                    for (u8 J = 0; J < 56; ++J) {
+          //INT L=100
+          for (u8 x = 0; x < 128; ++x) {
+                    for (u8 y = 0; y < 56; ++y) {
 
-                              Display.SetPX(I, J+8);
+                              Display.SetPX(x, y+8);
 
                     }          
           }
