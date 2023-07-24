@@ -2,7 +2,7 @@
 #include "radio.hpp"
 #include "system.hpp"
 #include "uv_k5_display.hpp"
-#include <math.h>
+//#include <math.h>
 /////////#include <stdlib.h>
 
 typedef unsigned char u8;
@@ -56,39 +56,14 @@ public:
   }
 
   inline void Scan() {
-    u8 rssi = 0, rssiMax = 0;
-    u8 iPeak = 0;
-    u32 fPeak = currentFreq, fMeasure = FStart;
 
-    rssiMin = 255;
-    RadioDriver.ToggleAFDAC(false);
-
-    for (u8 i = 0; i < measurementsCount; ++i, fMeasure += scanStep) {
-      rssi = rssiHistory[i] = GetRssi(fMeasure);
-      if (rssi < rssiMin) {
-        rssiMin = rssi;
-      }
-      if (rssi > rssiMax) {
-        rssiMax = rssi;
-        fPeak = fMeasure;
-        iPeak = i;
-      }
-    }
-
-    ++highestPeakT;
-    if (rssiMax > highestPeakRssi || highestPeakT >= (8 << sampleZoom)) {
-      highestPeakT = 0;
-      highestPeakRssi = rssiMax;
-      highestPeakX = iPeak << sampleZoom;
-      highestPeakF = fPeak;
-    }
   }
 
 
   inline void DrawSpectrum() {
-    for (u8 x = 0; x < 128; ++x) {
-      Display.SetPX(x, 40);
-    }
+   // for (u8 x = 0; x < 128; ++x) {
+   //   Display.SetPX(x, 40);
+   // }
             
 ///////////// MANDEL >>>
             u8 max=100;
