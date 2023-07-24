@@ -100,7 +100,9 @@ public:
                               i16 R=X*X;
                               i16 Q=Y*Y;
                               if (R+Q>4 || N>=L) {
-                                        Display.SetPX(I, J+8);
+                                        if (N>=10) {
+                                                  Display.SetPX(I, J+8);
+                                        }
                               }
                               Y=2*X*Y+V;
                               X=R-Q+U;
@@ -114,12 +116,12 @@ public:
   }
 
   inline void DrawNums() {
-    Display.SetCoursorXY(0, 0);
-    Display.PrintFixedDigitsNumber2(scanDelay, 0);
+    //Display.SetCoursorXY(0, 0);
+    //Display.PrintFixedDigitsNumber2(scanDelay, 0);
   }
 
   inline void DrawRssiTriggerLevel() {
-    Display.DrawLine(0, 127, Rssi2Y(rssiTriggerLevel));
+ //   Display.DrawLine(0, 127, Rssi2Y(rssiTriggerLevel));
   }
 
   inline void DrawTicks() {
@@ -139,12 +141,7 @@ public:
   }
 
   inline void DrawArrow(u8 x) {
-    u8 *peakPos = FwData.pDisplayBuffer + BarPos + x;
-    x > 1 && (*(peakPos - 2) |= 0b01000000);
-    x > 0 && (*(peakPos - 1) |= 0b01100000);
-    (*(peakPos) |= 0b01110000);
-    x < 127 && (*(peakPos + 1) |= 0b01100000);
-    x < 128 && (*(peakPos + 2) |= 0b01000000);
+
   }
 
   void HandleUserInput() {
@@ -218,8 +215,7 @@ public:
   }
 
   void UpdateRssiTriggerLevel(i32 diff) {
-    rssiTriggerLevel = clamp(rssiTriggerLevel + diff, 10, 255);
-    OnUserInput();
+
   }
 
   void UpdateScanDelay(i32 diff) {
@@ -239,8 +235,7 @@ public:
   }
 
   void UpdateFreqChangeStep(i64 diff) {
-    frequencyChangeStep = clamp(frequencyChangeStep + diff, 100_KHz, 2_MHz);
-    OnUserInput();
+
   }
 
   inline void OnUserInput() {
