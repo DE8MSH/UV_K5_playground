@@ -85,16 +85,26 @@ public:
   }
 
   inline void DrawSpectrum() {
-    for (u8 x = 0; x < 128; ++x) {
-      Display.SetPX(x, 40);
-    }
+//    for (u8 x = 0; x < 128; ++x) {
+//      Display.SetPX(x, 40);
+//    }
 ///////////// MANDEL >>>
-          //INT L=100
-          for (u8 x = 0; x < 128; ++x) {
-                    for (u8 y = 0; y < 56; ++y) {
-
-                              Display.SetPX(x, y+8);
-
+          u8 L=100;
+          for (u8 I = 0; I < 128; ++I) {
+                    for (u8 J = 0; J < 56; ++J) {
+                              u8 U=I/64-1.5;
+                              u8 V=J/28-1;
+                              u8 X=U;        
+                              u8 Y=V;
+                              u8 N=0;
+                              u8 R=X*X;
+                              u8 Q=Y*Y;
+                              if ((R+Q>4) OR (N>=L) {
+                                        Display.SetPX(x, y+8);
+                              }
+                              Y=2*X*Y+V;
+                              X=R-Q+U;
+                              N=N+1;
                     }          
           }
             
