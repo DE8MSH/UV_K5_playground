@@ -61,7 +61,7 @@ public:
 
   inline void DrawSpectrum() {
     for (u8 x = 0; x < 128; ++x) {
-              for (u8 y = 0; x < 56; ++<) {
+              for (u8 y = 0; y < 56; ++y) {
       Display.SetPX(x, y+8);
     }
     }
