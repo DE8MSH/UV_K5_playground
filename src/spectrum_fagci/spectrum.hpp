@@ -88,6 +88,19 @@ public:
     for (u8 x = 0; x < 128; ++x) {
       Display.SetPX(x, 40);
     }
+///////////// MANDEL >>>
+          int L=100
+          for (u8 I = 0; I < 128; ++I) {
+                    for (u8 J = 0; J < 56; ++J) {
+
+                              Display.SetPX(I, J+8);
+
+                    }          
+          }
+            
+
+//// < MANDEL
+            
   }
 
   inline void DrawNums() {
@@ -256,6 +269,7 @@ public:
     Update();
     Render();
   }
+
 
 private:
   void RestoreParams() {
