@@ -85,7 +85,8 @@ public:
 
   inline void DrawSpectrum() {
     for (u8 x = 0; x < 128; ++x) {
-      Display.DrawHLine(Rssi2Y(rssiHistory[x >> sampleZoom]), DrawingEndY, x);
+      //Display.DrawHLine(Rssi2Y(rssiHistory[x >> sampleZoom]), DrawingEndY, x);
+      Bitmap.Setpixel(x,30);
     }
   }
 
