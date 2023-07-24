@@ -37,8 +37,8 @@ public:
       auto const BallPosition = Game.getBallPosition();
       auto const PlatformPosition = Game.getPlatformPosition();
       
-      Display.DrawRectangle(BallPosition.x, BallPosition.y, 7, 7, true);
-      Display.DrawRectangle(PlatformPosition.x, PlatformPosition.y, 6, 20, true);
+      //Display.DrawRectangle(BallPosition.x, BallPosition.y, 7, 7, true);
+      //Display.DrawRectangle(PlatformPosition.x, PlatformPosition.y, 6, 20, true);
       Display.SetCoursor(0, 0);
       Display.SetFont(&FontSmallNr);
       Display.Print(C8RssiString);
