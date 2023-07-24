@@ -21,7 +21,7 @@ public:
   static constexpr auto DrawingEndY = 42;
   static constexpr auto BarPos = 5 * 128;
 
-  u8 rssiHistory[128] = {};
+
   u8 measurementsCount = 32;
   u8 rssiMin = 255;
   u8 highestPeakX = 0;
@@ -90,23 +90,33 @@ public:
 //    }
 ///////////// MANDEL >>>
           i16 L=100;
-          for (u8 I = 0; I < 128; ++I) {
+
+                              i16 U;
+                              i16 V;
+                              i16 X;        
+                              i16 Y;
+                              i16 N;
+                              i16 R;
+                              i16 Q;
+            for (u8 I = 0; I < 128; ++I) {
                     for (u8 J = 0; J < 56; ++J) {
-                              i16 U=I/64-1.5;
-                              i16 V=J/28-1;
-                              i16 X=U;        
-                              i16 Y=V;
-                              i16 N=0;
-                              i16 R=X*X;
-                              i16 Q=Y*Y;
+                              U=I/64-1.5;
+                              V=J/28-1;
+                              X=U;        
+                              Y=V;
+                              N=0;
+                              R=X*X;
+                              Q=Y*Y;
                               if (R+Q>4 || N>=L) {
-                                        if (N<10) {
+                                        if (N=>10) {
                                                   Display.SetPX(I, J+8);
                                         }
                               }
+                              else {
                               Y=2*X*Y+V;
                               X=R-Q+U;
                               N=N+1;
+                              }
                     }          
           }
             
