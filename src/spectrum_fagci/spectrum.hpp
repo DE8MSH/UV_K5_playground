@@ -21,7 +21,7 @@ public:
   static constexpr auto DrawingEndY = 42;
   static constexpr auto BarPos = 5 * 128;
 
-  u8 rssiHistory[128] = {};
+  u8 rssiHistory[2] = {};
   u8 measurementsCount = 32;
   u8 rssiMin = 255;
   u8 highestPeakX = 0;
@@ -32,8 +32,7 @@ public:
 
   CSpectrum()
       : DisplayBuff(FwData.pDisplayBuffer), FontSmallNr(FwData.pSmallDigs),
-        Display(DisplayBuff), scanDelay(800), sampleZoom(2), scanStep(25_KHz),
-        frequencyChangeStep(100_KHz), rssiTriggerLevel(65) {
+        Display(DisplayBuff) {
     Display.SetFont(&FontSmallNr);
   };
 
