@@ -68,12 +68,18 @@ public:
             u8 max=100;
             u8 height=56;
             u8 width=128;
+
+       i16 c_re;
+        i16 c_im;
+        i16 x,y;
+        u8 iteration;
+
    for (u8 row = 0; row < height; row++) {
     for (u8 col = 0; col < width; col++) {
-        i16 c_re = (col - width/2.0)*4.0/width;
-        i16 c_im = (row - height/2.0)*4.0/width;
-        i16 x = 0, y = 0;
-        u8 iteration = 0;
+        c_re = (col - width/2.0)*4.0/width;
+        c_im = (row - height/2.0)*4.0/width;
+        x = 0, y = 0;
+        iteration = 0;
         while (x*x+y*y <= 4 && iteration < max) {
             i16 x_new = x*x - y*y + c_re;
             y = 2*x*y + c_im;
